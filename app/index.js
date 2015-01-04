@@ -22,11 +22,6 @@ var SkipcodeGenerator = yeoman.generators.Base.extend({
             message: 'What is your app\'s name?',
             default: process.cwd().split(path.sep).pop()
         }, {
-            type: 'confirm',
-            name: 'includeNormalize',
-            message: 'Include normalize.css as a Bower dependency?',
-            default: true
-        }, {
             type: 'list',
             name: 'versionOfIE',
             message: 'What version of IE do you need to support?',
@@ -43,6 +38,11 @@ var SkipcodeGenerator = yeoman.generators.Base.extend({
                 { name: "HTML", value: "html" },
                 { name: "PHP (Partials directory and grunt-php2html will be added )", value: "php" }
             ]
+        }, {
+            type: 'confirm',
+            name: 'includeNormalize',
+            message: 'Include normalize.css as a Bower dependency?',
+            default: true
         }, {
             type: 'confirm',
             name: 'includeJquery',

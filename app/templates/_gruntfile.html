@@ -105,6 +105,12 @@ module.exports = function(grunt) {
                     src: ['<%%= config.source %>/images/{,*/}*.{png,jpg,gif}'],
                     dest: '<%%= config.build %>/images'
                 }
+                <% if( templateLang !== 'php' ) { %>
+                sources: {
+                    src: ['<%%= config.source %>/*.html'],
+                    dest: '<%%= config.build %>'
+                }
+                <% } %>
             }
         },
         imagemin: {
@@ -183,7 +189,19 @@ module.exports = function(grunt) {
         'sass:build'
     ]);
 <% } else { %>
-    grunt.registerTask('build', ['copy', 'wiredep:build']);
+    grunt.registerTask('build', [
+        'clean:build',
+        'copy',
+        'wiredep:build',
+        'useminPrepare',
+        'concat',
+        'cssmin',
+        'imagemin:build',
+        'uglify',
+        'usemin',
+        'clean:temp',
+        'sass:build'
+    ]);
 <% } %>
     grunt.registerTask('pack', ['build', 'compress']);
 };

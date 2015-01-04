@@ -23,14 +23,16 @@ htmlTag = '<html class="no-js">'
     <main role="main">
         <h1>Welcome to the <%= appname %> project</h1>
     </main>
-    <%
-    if( includeJquery ) {
-    if( versionOfIE === 'ie9' || versionOfIE === 'iefree' ) {
-    print('<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>')
-    } else {
-    print('<!--[if lt IE 9]><script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script><![endif]-->\n' + '<!--[if gt IE 8]><!--><script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script><!--<![endif]-->');
+<% if( includeJquery ) {
+    if( isJqueryLocal === 'no' ) {
+    if( versionOfIE === 'ie9' || versionOfIE === 'iefree' ) { %>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <% } else { %>
+    <!--[if lt IE 9]><script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script><![endif]-->
+    <!--[if gt IE 8]><!--><script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script><!--<![endif]-->
+    <% }
     }
-    } %>
+} %>
 
     <!-- build:js(.) scripts/vendor.js -->
     <!-- bower:js -->
