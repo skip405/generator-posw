@@ -1,0 +1,93 @@
+body {
+    box-sizing: border-box;
+    min-width: $bodyMinWidth;
+
+    color: $textColor;
+    font: 300 #{$copy_font_size}/#{$copy_line_height} $copy_font;
+
+    @include MQ(Mneg) {
+        min-width: $bodyMinWidthMobile;
+    }
+}
+
+a{
+    & {
+        transition: background-color $transition_speed, color $transition_speed, border-color $transition_speed;
+        border-bottom: 1px solid transparent;
+
+        color: $linkColor;
+        font-weight: 400;
+        text-decoration: none;
+    }
+
+    &:hover {
+        border-bottom-color: $linkHoverBorderColor;
+
+        color: $linkColor;
+    }
+}
+
+p {
+    &:last-child {
+        margin-bottom: 0;
+    }
+}
+
+button,
+input[type="submit"],
+input[type="reset"] {
+    transition: background-color $transition_speed, color $transition_speed, border-color $transition_speed;
+
+    cursor: default;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+strong,
+b {
+    font-weight: 800;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ul,
+ol,
+blockquote,
+figure {
+    padding: 0;
+    margin: 0 0 1em;
+}
+
+table {
+    width: 100%;
+}
+
+th {
+    text-align: left;
+}
+
+section + section {
+    margin-top: 2.6em;
+}
+
+h1 {
+    font-size: 2.81em;
+}
+
+h2 {
+    font-size: 1.56em;
+    line-height: 1.5;
+}
+
+h3 {
+    font-size: 1.25em;
+}

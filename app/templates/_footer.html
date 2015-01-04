@@ -1,0 +1,18 @@
+<% if( includeJquery ) {
+    if( isJqueryLocal === 'no' ) {
+        if( versionOfIE === 'ie9' || versionOfIE === 'iefree' ) { %>
+            <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <% } else { %>
+            <!--[if lt IE 9]><script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script><![endif]-->
+            <!--[if gt IE 8]><!--><script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script><!--<![endif]-->
+        <% }
+    }
+} %>
+<!-- build:js(.) scripts/vendor.js -->
+<!-- bower:js -->
+<!-- endbower -->
+<!-- endbuild -->
+<script src="scripts/<%= appnameSlug %>.min.js"></script>
+
+</body>
+</html>

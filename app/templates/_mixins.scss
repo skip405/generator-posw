@@ -1,0 +1,7 @@
+$M: 48em; // 640px
+
+@mixin MQ($canvas) {
+    @if $canvas == Mneg {
+        @media only screen and (max-width: $M - .01) { @content; }
+    }
+}

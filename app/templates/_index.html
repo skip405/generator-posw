@@ -1,0 +1,41 @@
+<!doctype html><% var conditionals = '';
+var htmlTag = '<!--[if gt IE 9]><!--><html class="no-js"><!--<![endif]-->';
+
+if ( versionOfIE === 'ie8' ) {
+conditionals = '<!--[if IE 7 | IE 8]><html class="ie no-js"><![endif]-->\n' +
+'<!--[if IE 9]><html class="ie9 no-js"><![endif]-->\n';
+} else if ( versionOfIE === 'ie9' ) {
+conditionals = '<!--[if IE 9]><html class="ie9 no-js"><![endif]-->\n';
+} else {
+htmlTag = '<html class="no-js">'
+} %>
+<%= conditionals %><%= htmlTag %>
+<head>
+    <meta charset="UTF-8">
+    <title><%= appname %> - index page</title>
+    <!-- build:css(.) styles/libs.css -->
+    <!-- bower:css -->
+    <!-- endbower -->
+    <!-- endbuild -->
+    <link rel="stylesheet" href="styles/<%= appnameSlug %>.css"/>
+</head>
+<body>
+    <main role="main">
+        <h1>Welcome to the <%= appname %> project</h1>
+    </main>
+    <%
+    if( includeJquery ) {
+    if( versionOfIE === 'ie9' || versionOfIE === 'iefree' ) {
+    print('<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>')
+    } else {
+    print('<!--[if lt IE 9]><script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script><![endif]-->\n' + '<!--[if gt IE 8]><!--><script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script><!--<![endif]-->');
+    }
+    } %>
+
+    <!-- build:js(.) scripts/vendor.js -->
+    <!-- bower:js -->
+    <!-- endbower -->
+    <!-- endbuild -->
+    <script src="scripts/<%= appnameSlug %>.min.js"></script>
+</body>
+</html>

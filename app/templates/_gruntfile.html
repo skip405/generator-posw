@@ -1,0 +1,189 @@
+module.exports = function(grunt) {
+
+    require('time-grunt')(grunt);
+    require('load-grunt-tasks')(grunt);
+
+    var config = {
+        source: 'source',
+        build: 'build',
+        archives: 'archives'
+    };
+
+    grunt.initConfig({
+        pkg: grunt.file.readJSON('package.json'),
+        config: config,
+        sass: {
+            options: {
+                style: 'compressed'
+            },
+            source: {
+                files: {
+                    '<%%= config.source %>/styles/<%= appnameSlug %>.css': '<%%= config.source %>/styles/<%= appnameSlug %>.scss'
+                }
+            },
+            build: {
+                files: {
+                    '<%%= config.build %>/styles/leads.css': '<%%= config.source %>/styles/<%= appnameSlug %>.scss'
+                }
+            }
+        },
+        compress: {
+            main: {
+                options: {
+                    archive: '<%%= config.archives %>/<%= appnameSlug %>.<%%= grunt.template.today("dd-mm-yyyy") %>.zip'
+                },
+                files: [{expand: true, cwd: '<%%= config.build %>/', src: ['**']}]
+            }
+        },
+        autoprefixer: {
+            options: {
+                browsers: [
+                    'last 2 versions'<% if( versionOfIE === 'ie8' ) { %>,
+                    'ie 8',
+                    'ie 9'<% } else if ( versionOfIE === 'ie9' ) { %>,
+                    'ie 9'<% } %>
+                ],
+                silent: true
+            },
+            source: {
+                src: '<%%= config.source %>/styles/<%= appnameSlug %>.css',
+                dest: '<%%= config.source %>/styles/<%= appnameSlug %>.css'
+            },
+            build: {
+                src: '<%%= config.build %>/styles/<%= appnameSlug %>.css',
+                dest: '<%%= config.build %>/styles/<%= appnameSlug %>.css'
+            },
+        },
+        watch: {
+            options: {
+                livereload: true
+            },
+            bower: {
+                files: ['bower.json'],
+                tasks: ['wiredep:source']
+            },
+            css: {
+                files: ['<%%= config.source %>/styles/{,*/}*.scss'],
+                tasks: ['sass:source', 'autoprefixer:source'],
+                options: {
+                    spawn: false,
+                },
+            },
+            gruntfile: {
+                files: ['Gruntfile.js']
+            },
+            js: {
+                files: ['<%%= config.source %>/scripts/{,*/}*.js']
+            },
+            src: {
+                files: ['<%%= config.source %>/{,*/}*.<%= templateLang %>']
+            }
+        },
+        clean: {
+            build: {
+                files: [{
+                    dot: true,
+                    src: [
+                        '.tmp',
+                        '<%%= config.build %>/*',
+                        '!<%%= config.build %>/.git*'
+                    ]
+                }]
+            },
+            temp: {
+                files: [{
+                    dot: true,
+                    src: [
+                        '.tmp'
+                    ]
+                }]
+            }
+        },
+        copy:{
+            build: {
+                images: {
+                    src: ['<%%= config.source %>/images/{,*/}*.{png,jpg,gif}'],
+                    dest: '<%%= config.build %>/images'
+                }
+            }
+        },
+        imagemin: {
+            build: {
+                files: [{
+                    expand: true,
+                    cwd: '<%%= config.source %>/images/',
+                    src: ['{,*/}*.{png,jpg,gif}'],
+                    dest: '<%%= config.build %>/images'
+                }]
+            }
+        },
+        useminPrepare: {
+            options: {
+                dest: '<%%= config.build %>'
+            },
+            html: '<%%= config.build %>/*.html'
+        },
+        usemin: {
+            options: {
+                assetsDirs: [
+                    '<%%= config.build %>',
+                    '<%%= config.build %>/images',
+                    '<%%= config.build %>/styles'
+                ]
+            },
+            html: ['<%%= config.build %>/{,*/}*.html'],
+            css: ['<%%= config.build %>/styles/{,*/}*.css']
+        },
+        uglify: {
+            build: {
+                files: {
+                    '<%%= config.build %>/scripts/<%= appnameSlug %>.min.js': ['<%%= config.source %>/scripts/<%= appnameSlug %>.min.js']
+                }
+            }
+        },
+        wiredep: {
+            source: {
+                ignorePath: /^<%%= config.source %>\/|\.\.\//,
+                src: ['<%%= config.source %>/{,*/}*.<%= templateLang %>']
+            },
+            build:{
+                ignorePath: /^<%%= config.source %>\/|\.\.\//,
+                src: ['<%%= config.build %>/{,*/}*.html']
+            }
+        }<% if( templateLang === 'php' ) { %>,
+        php2html: {
+            default: {
+                files: [
+                    {
+                        expand: true,
+                        cwd: '<%%= config.source %>/',
+                        src: ['*.php'],
+                        dest: '<%%= config.build %>/',
+                        ext: '.html'
+                    }
+                ]
+            }
+        }<% } %>
+    });
+
+    grunt.registerTask('default', ['wiredep:source', 'sass:source', 'autoprefixer:source', 'watch']);
+<% if( templateLang === 'php' ) { %>
+    grunt.registerTask('build', [
+        'clean:build',
+        'php2html',
+        'wiredep:build',
+        'useminPrepare',
+        'concat',
+        'cssmin',
+        'imagemin:build',
+        'uglify',
+        'usemin',
+        'clean:temp',
+        'copy',
+        'sass:build'
+    ]);
+<% } else { %>
+    grunt.registerTask('build', ['copy', 'wiredep:build']);
+<% } %>
+    grunt.registerTask('pack', ['build', 'compress']);
+};
