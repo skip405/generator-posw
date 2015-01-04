@@ -102,15 +102,15 @@ module.exports = function(grunt) {
         copy:{
             build: {
                 <% if( templateLang === 'php' ) { %>
-                expand: true,
-                cwd: '<%= config.source %>/',
-                src: ['*.html', 'images/**'],
-                dest: '<%= config.build %>/'
-                <% } else { %>
                 images: {
                     src: ['<%%= config.source %>/images/{,*/}*.{png,jpg,gif}'],
                     dest: '<%%= config.build %>/images'
                 }
+                <% } else { %>
+                expand: true,
+                cwd: '<%= config.source %>/',
+                src: ['*.html', 'images/**'],
+                dest: '<%= config.build %>/'
                 <% } %>
             }
         },
@@ -154,8 +154,8 @@ module.exports = function(grunt) {
                 src: ['<%%= config.source %>/{,*/}*.<%= templateLang %>']
             },
             build:{<% if( templateLang === 'php' ) { %>
-                ignorePath: /^\.\.\//,<% } else { %>
-                ignorePath: /^<%%= config.source %>\/|\.\.\//,<% } %>
+                ignorePath: /^<%%= config.source %>\/|\.\.\//,<% } else { %>
+                ignorePath: /^\.\.\//,<% } %>
                 src: ['<%%= config.build %>/{,*/}*.html']
             }
         }<% if( templateLang === 'php' ) { %>,
