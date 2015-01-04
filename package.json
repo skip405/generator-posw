@@ -1,7 +1,7 @@
 {
   "name": "generator-posw",
   "version": "0.0.0",
-  "description": "Yeoman generator",
+  "description": "A Yeoman generator for a Plain Old Semantic Website",
   "license": "MIT",
   "main": "app/index.js",
   "repository": "skip405/generator-posw",
