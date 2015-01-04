@@ -1,7 +1,6 @@
 # generator-posw
 
-POSW stands for **P**lain **O**ld **S**emantic **W**ebsite. It's an opinionated [Yeoman](http://yeoman.io) generator that will help you code a static website from design mockups.
-
+POSW stands for **P**lain **O**ld **S**emantic **W**ebsite. It's an opinionated [Yeoman](http://yeoman.io) generator that will help you code a static website from design mockups. As Yeoman uses [npm](http://npmjs.org/) and [Bower](http://bower.io/) you need to have those two installed too, but you already know that, don't you? :)
 
 ## Features
 
@@ -12,7 +11,6 @@ POSW comes with a bunch of stuff:
 * The ``styles`` folder structure is made with [BEM](http://bem.info) in mind.
 * Also it has a bunch of ready-to-use Grunt tasks that just work. More on that [below](#grunt-tasks).
 * It encourages you to use [Bower](http://bower.io) as your dependencies manager
-
 
 ## Getting Started
 
@@ -62,26 +60,21 @@ package.json
 
 and that's it, just a Plain Old Semantic Website.
 
-
 ## Grunt tasks
 
 There are three powerful Grunt tasks that are pre-configured for you:
 
-
 ### ``grunt``
 
-The ``default`` task will [wire your Bower dependencies](https://github.com/stephenplusplus/grunt-wiredep), compile the [default sass](https://github.com/gruntjs/grunt-contrib-sass) files, supply the needed [vendor prefixes](https://github.com/nDmitry/grunt-autoprefixer) for some CSS properties and will [watch for changes](https://github.com/gruntjs/grunt-contrib-watch) to the files.
-
+The ``default`` task will [wire your Bower dependencies](https://github.com/stephenplusplus/grunt-wiredep), compile the [default sass](https://github.com/gruntjs/grunt-contrib-sass) files, supply the needed [vendor prefixes](https://github.com/nDmitry/grunt-autoprefixer) for some CSS properties and will [watch for changes](https://github.com/gruntjs/grunt-contrib-watch) to the files. After this task successfully runs and waits watching your files, you can start coding :) 
 
 ### ``grunt build``
 
 The ``build`` task will create the ``build`` folder and copy the source files there making them production ready. Making HTML from PHP (if you choose PHP, otherwise grunt will copy the source files), concating Bower dependencies into one file and uglifying it, optimizing images using [``grunt-contrib-imagemin``](https://github.com/gruntjs/grunt-contrib-imagemin) and so on. Do make sure to open at least one file to check if the paths to files are correct, which they should be :)
 
-
 ### ``grunt pack``
 
 The ``pack`` task will make a fresh build, then compress it into a zipball with a name ``<projectSlug>.<dd-mm-yyy>.zip`` and put it into the ``archives`` folder.
-
 
 ## PHP
 
@@ -90,7 +83,6 @@ As it's said in the features description you can choose to code in PHP. It will 
 In order to just open the coded PHP in the browser you need a PHP interpreter. It may come in a form of a WAMP, MAMP, XAMPP or any other ..AMP of your choice. Besides, if you use [PHPStorm](https://www.jetbrains.com/phpstorm/), you can set this up even fancier.
 
 If you have any troubles making PHP work for you, please fire an issue and I'll do my best to help, if I can.
-
 
 ## License
 
