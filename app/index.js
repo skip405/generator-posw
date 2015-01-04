@@ -122,7 +122,6 @@ var SkipcodeGenerator = yeoman.generators.Base.extend({
                 "grunt-autoprefixer": "~1.0.1",
                 "grunt-contrib-uglify": "~0.6.0",
                 "grunt-contrib-cssmin": "^0.11.0",
-                "grunt-newer": "~0.8.0",
                 "grunt-wiredep": "^1.9.0",
                 "grunt-usemin": "~2.6.2",
                 "time-grunt": "^1.0.0"

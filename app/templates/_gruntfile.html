@@ -101,14 +101,15 @@ module.exports = function(grunt) {
         },
         copy:{
             build: {
+                <% if( templateLang === 'php' ) { %>
+                expand: true,
+                cwd: '<%= config.source %>/',
+                src: ['*.html', 'images/**'],
+                dest: '<%= config.build %>/'
+                <% } else { %>
                 images: {
                     src: ['<%%= config.source %>/images/{,*/}*.{png,jpg,gif}'],
                     dest: '<%%= config.build %>/images'
-                }
-                <% if( templateLang !== 'php' ) { %>
-                sources: {
-                    src: ['<%%= config.source %>/*.html'],
-                    dest: '<%%= config.build %>'
                 }
                 <% } %>
             }
@@ -148,12 +149,13 @@ module.exports = function(grunt) {
             }
         },
         wiredep: {
-            source: {
-                ignorePath: /^<%%= config.source %>\/|\.\.\//,
+            source: {<% if( templateLang === 'php' ) { %>
+                ignorePath: /^<%%= config.source %>\/|\.\.\//,<% } %>
                 src: ['<%%= config.source %>/{,*/}*.<%= templateLang %>']
             },
-            build:{
-                ignorePath: /^<%%= config.source %>\/|\.\.\//,
+            build:{<% if( templateLang === 'php' ) { %>
+                ignorePath: /^\.\.\//,<% } else { %>
+                ignorePath: /^<%%= config.source %>\/|\.\.\//,<% } %>
                 src: ['<%%= config.build %>/{,*/}*.html']
             }
         }<% if( templateLang === 'php' ) { %>,
@@ -173,10 +175,11 @@ module.exports = function(grunt) {
     });
 
     grunt.registerTask('default', ['wiredep:source', 'sass:source', 'autoprefixer:source', 'watch']);
-<% if( templateLang === 'php' ) { %>
+
     grunt.registerTask('build', [
-        'clean:build',
-        'php2html',
+        'clean:build',<% if( templateLang === 'php' ) { %>
+        'php2html',<% } else { %>
+        'copy',<% } %>
         'wiredep:build',
         'useminPrepare',
         'concat',
@@ -184,24 +187,10 @@ module.exports = function(grunt) {
         'imagemin:build',
         'uglify',
         'usemin',
-        'clean:temp',
-        'copy',
+        'clean:temp',<% if( templateLang === 'php' ) { %>
+        'copy',<% } %>
         'sass:build'
     ]);
-<% } else { %>
-    grunt.registerTask('build', [
-        'clean:build',
-        'copy',
-        'wiredep:build',
-        'useminPrepare',
-        'concat',
-        'cssmin',
-        'imagemin:build',
-        'uglify',
-        'usemin',
-        'clean:temp',
-        'sass:build'
-    ]);
-<% } %>
+
     grunt.registerTask('pack', ['build', 'compress']);
 };
