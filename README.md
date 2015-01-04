@@ -1,4 +1,4 @@
-# generator-posw
+# generator-posw [![Build Status](https://secure.travis-ci.org/skip405/generator-posw.png?branch=master)](https://travis-ci.org/skip405/generator-posw)
 
 > [Yeoman](http://yeoman.io) generator
 
