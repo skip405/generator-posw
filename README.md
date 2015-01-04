@@ -70,15 +70,15 @@ There are three powerful Grunt tasks that are pre-configured for you:
 
 ### ``grunt``
 
-The default task will [wire your Bower dependencies](https://github.com/stephenplusplus/grunt-wiredep), compile the [default sass](https://github.com/gruntjs/grunt-contrib-sass) files, supply the needed [vendor prefixes](https://github.com/nDmitry/grunt-autoprefixer) for some CSS properties and will [watch for changes](https://github.com/gruntjs/grunt-contrib-watch) to the files.
+The ``default`` task will [wire your Bower dependencies](https://github.com/stephenplusplus/grunt-wiredep), compile the [default sass](https://github.com/gruntjs/grunt-contrib-sass) files, supply the needed [vendor prefixes](https://github.com/nDmitry/grunt-autoprefixer) for some CSS properties and will [watch for changes](https://github.com/gruntjs/grunt-contrib-watch) to the files.
 
 
-### ``build``
+### ``grunt build``
 
 The ``build`` task will create the ``build`` folder and copy the source files there making them production ready. Making HTML from PHP (if you choose PHP, otherwise grunt will copy the source files), concating Bower dependencies into one file and uglifying it, optimizing images using [``grunt-contrib-imagemin``](https://github.com/gruntjs/grunt-contrib-imagemin) and so on. Do make sure to open at least one file to check if the paths to files are correct, which they should be :)
 
 
-### ``pack``
+### ``grunt pack``
 
 The ``pack`` task will make a fresh build, then compress it into a zipball with a name ``<projectSlug>.<dd-mm-yyy>.zip`` and put it into the ``archives`` folder.
 
@@ -87,7 +87,7 @@ The ``pack`` task will make a fresh build, then compress it into a zipball with 
 
 As it's said in the features description you can choose to code in PHP. It will add [grunt-php2html](https://github.com/bezoerb/grunt-php2html) task to convert PHP to HTML when running the ``build`` task. Make sure you carefully set up the ``php-cgi`` binary for your system.
 
-In order to just open the coded PHP in the browser you need a PHP interpreter. It may come from a WAMP, MAMP, XAMPP or any other ..AMP of your choice. Besides, if you use [PHPStorm](https://www.jetbrains.com/phpstorm/), you can set this up even fancier.
+In order to just open the coded PHP in the browser you need a PHP interpreter. It may come in a form of a WAMP, MAMP, XAMPP or any other ..AMP of your choice. Besides, if you use [PHPStorm](https://www.jetbrains.com/phpstorm/), you can set this up even fancier.
 
 If you have any troubles making PHP work for you, please fire an issue and I'll do my best to help, if I can.
 
