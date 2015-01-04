@@ -126,6 +126,7 @@ module.exports = function(grunt) {
         },
         useminPrepare: {
             options: {
+                root: '<%%= config.source %>/',
                 dest: '<%%= config.build %>'
             },
             html: '<%%= config.build %>/*.html'
@@ -153,9 +154,7 @@ module.exports = function(grunt) {
                 ignorePath: /^<%%= config.source %>\/|\.\.\//,<% } %>
                 src: ['<%%= config.source %>/{,*/}*.<%= templateLang %>']
             },
-            build:{<% if( templateLang === 'php' ) { %>
-                ignorePath: /^<%%= config.source %>\/|\.\.\//,<% } else { %>
-                ignorePath: /^\.\.\//,<% } %>
+            build:{
                 src: ['<%%= config.build %>/{,*/}*.html']
             }
         }<% if( templateLang === 'php' ) { %>,
