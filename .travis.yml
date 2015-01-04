@@ -3,5 +3,5 @@ node_js:
   - '0.10'
 before_install:
   - currentfolder=${PWD##*/}
-  - if [ "$currentfolder" != 'generator-skipcode' ]; then cd .. && eval "mv $currentfolder generator-skipcode" && cd generator-skipcode; fi
+  - if [ "$currentfolder" != 'generator-posw' ]; then cd .. && eval "mv $currentfolder generator-posw" && cd generator-posw; fi
 

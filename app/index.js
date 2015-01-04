@@ -123,7 +123,6 @@ var SkipcodeGenerator = yeoman.generators.Base.extend({
                 "grunt-contrib-uglify": "~0.6.0",
                 "grunt-contrib-cssmin": "^0.11.0",
                 "grunt-newer": "~0.8.0",
-                "grunt-filerev": "~2.1.2",
                 "grunt-wiredep": "^1.9.0",
                 "grunt-usemin": "~2.6.2",
                 "time-grunt": "^1.0.0"
@@ -151,7 +150,7 @@ var SkipcodeGenerator = yeoman.generators.Base.extend({
                     templateLang: this.templateLang,
                     jQueryVersion: this.jQueryVersion
                 },
-                directories = ['psd', 'source/images', 'source/styles/libs', 'source/styles/blocks', 'source/scripts/libs'],
+                directories = ['mockups', 'source/images', 'source/styles/libs', 'source/styles/blocks', 'source/scripts/libs'],
                 emptyFiles = ['source/styles/libs/libs.scss', 'source/styles/fonts.scss', 'source/styles/blocks/blocks.scss'],
                 filesToCopy = {
                     '_mixins.scss': 'source/styles/mixins.scss',
