@@ -9,12 +9,14 @@ Those who don't like the word _Semantic_ when I speak about a website, not marku
 POSW comes with a bunch of stuff:
 
 * It allows you to code either in PHP or HTML.
-* It uses [Sass](http://sass-lang.com) as a CSS preprocessor.
+* It uses Sass as a CSS preprocessor. You need to have [Ruby](https://www.ruby-lang.org/en/documentation/installation/) and [Sass](http://sass-lang.com) installed and in your PATH for this to work.
 * The ``styles`` folder structure is made with [BEM](http://bem.info) in mind.
 * Also it has a bunch of ready-to-use Grunt tasks that just work. More on that [below](#grunt-tasks).
 * It encourages you to use [Bower](http://bower.io) as your dependencies manager
 
 ## Getting Started
+
+Depending on your setup, you may beed to run the commands with ``sudo``.
 
 First you need to install Yeoman:
 
@@ -93,7 +95,7 @@ The ``vendor.js`` file will contain all of the Bower dependencies plus the files
 
 ### ``grunt pack``
 
-The ``pack`` task will make a fresh build, then compress it into a zipball with a name ``<projectSlug>.<dd-mm-yyy>.zip`` and put it into the ``archives`` folder.
+The ``pack`` task will make a fresh build, then compress it into a zipball with a name ``<projectSlug>.<dd-mm-yyyy>.zip`` and put it into the ``archives`` folder.
 
 ## PHP
 
