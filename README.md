@@ -40,6 +40,8 @@ yo posw
 
 Running this command will get you through a couple of questions to set you up. You'll need to specify what minimal version of Internet Explorer you need to support, what your language of preference is (PHP or HTML) and some other stuff.
 
+The question about the minimal IE version is needed for two things: a) to print out the corresponding conditional comments on the ``html`` tag and b) to include two versions of jQuery (via again a conditional comment) if you choose to add it via Google's CDN and not Bower. If your minimal IE version is 10 or 11, you may freely choose the ``No IE`` option
+
 If you choose PHP as your coding language, after this command you will hopefully get the following folder structure:
 
 ```
