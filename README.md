@@ -1,4 +1,4 @@
-# generator-posw
+# generator-posw [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
 
 POSW stands for **P**lain **O**ld **S**emantic **W**ebsite. It's an opinionated [Yeoman](http://yeoman.io) generator that will help you code a static website from design mockups. As Yeoman uses [npm](http://npmjs.org/) and [Bower](http://bower.io/) you need to have those two installed too, but you already know that, don't you? :)
 
@@ -16,7 +16,7 @@ POSW comes with a bunch of stuff:
 
 ## Getting Started
 
-Depending on your setup, you may beed to run the commands with ``sudo``.
+Depending on your setup, you may need to run the commands with ``sudo``.
 
 First you need to install Yeoman:
 
