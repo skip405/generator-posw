@@ -1,13 +1,30 @@
 'use strict';
 var util = require('util');
 var path = require('path');
+var chalk = require('chalk');
 var yeoman = require('yeoman-generator');
 var yosay = require('yosay');
 var GruntfileEditor = require('gruntfile-editor');
+var updateNotifier = require('update-notifier');
 
 var SkipcodeGenerator = yeoman.generators.Base.extend({
     initializing: function () {
         this.pkg = require('../package.json');
+    },
+
+    notifying: function(){
+        var notifier = updateNotifier({
+            packageName: this.pkg.name,
+            packageVersion: this.pkg.version
+        });
+
+        var message = [];
+
+        if (notifier.update) {
+            message.push('Update available: ' + chalk.green.bold(notifier.update.latest) + chalk.gray(' (current: ' + notifier.update.current + ')'));
+            message.push('Run ' + chalk.magenta('npm install -g ' + this.pkg.name) + ' to update.');
+            console.log(yosay(message.join(' '), { maxLength: stringLength(message[0]) }));
+        }
     },
 
     prompting: function () {
