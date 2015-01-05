@@ -18,12 +18,8 @@ var SkipcodeGenerator = yeoman.generators.Base.extend({
             packageVersion: this.pkg.version
         });
 
-        var message = [];
-
         if (notifier.update) {
-            message.push('Update available: ' + chalk.green.bold(notifier.update.latest) + chalk.gray(' (current: ' + notifier.update.current + ')'));
-            message.push('Run ' + chalk.magenta('npm install -g ' + this.pkg.name) + ' to update.');
-            console.log(yosay(message.join(' '), { maxLength: stringLength(message[0]) }));
+            notifier.notify();
         }
     },
 
