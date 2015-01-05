@@ -4,23 +4,21 @@ var path = require('path');
 var chalk = require('chalk');
 var yeoman = require('yeoman-generator');
 var yosay = require('yosay');
-var GruntfileEditor = require('gruntfile-editor');
 var updateNotifier = require('update-notifier');
+var pkg = require('../package.json');
+
+var notifier = updateNotifier({
+    packageName: pkg.name,
+    packageVersion: pkg.version
+});
+
+if (notifier.update) {
+    notifier.notify();
+}
 
 var SkipcodeGenerator = yeoman.generators.Base.extend({
     initializing: function () {
-        this.pkg = require('../package.json');
-    },
-
-    notifying: function(){
-        var notifier = updateNotifier({
-            packageName: this.pkg.name,
-            packageVersion: this.pkg.version
-        });
-
-        if (notifier.update) {
-            notifier.notify();
-        }
+        this.pkg = pkg;
     },
 
     prompting: function () {

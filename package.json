@@ -1,6 +1,6 @@
 {
   "name": "generator-posw",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "A Yeoman generator for a Plain Old Semantic Website",
   "license": "MIT",
   "main": "app/index.js",
@@ -22,12 +22,11 @@
   "keywords": [
     "yeoman-generator",
     "website",
-    "BEM",
+    "bem",
     "Sass"
   ],
   "dependencies": {
     "chalk": "^0.5.0",
-    "gruntfile-editor": "^0.2.0",
     "update-notifier": "^0.2.2",
     "yeoman-generator": "^0.17.0",
     "yosay": "^0.3.0"
