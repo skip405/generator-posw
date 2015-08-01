@@ -52,7 +52,7 @@ If you choose PHP as your coding language, after this command you will hopefully
 |___<partials>
 |___<scripts>
 |______<libs>
-|______project-slug.min.js
+|______project-slug.js
 |___<styles>
 |______<blocks>
 |______<libs>

@@ -35,24 +35,30 @@ module.exports = function(grunt) {
                 files: [{expand: true, cwd: '<%%= config.build %>/', src: ['**']}]
             }
         },
-        autoprefixer: {
+        postcss: {
             options: {
-                browsers: [
-                    'last 2 versions'<% if( versionOfIE === 'ie8' ) { %>,
-                    'ie 8',
-                    'ie 9'<% } else if ( versionOfIE === 'ie9' ) { %>,
-                    'ie 9'<% } %>
-                ],
-                silent: true
+                processors: [
+                    require('autoprefixer-core') ( { browsers: [
+                        'last 2 versions'<% if( versionOfIE === 'ie8' ) { %>,
+                        'ie 8',
+                        'ie 9'<% } else if ( versionOfIE === 'ie9' ) { %>,
+                        'ie 9'<% } %>
+                        ] } )
+                ]
             },
             source: {
                 src: '<%%= config.source %>/styles/<%= appnameSlug %>.css',
                 dest: '<%%= config.source %>/styles/<%= appnameSlug %>.css'
             },
             build: {
+                options: {
+                    processors: [
+                        require('cssnano')()
+                    ]
+                },
                 src: '<%%= config.build %>/styles/<%= appnameSlug %>.css',
                 dest: '<%%= config.build %>/styles/<%= appnameSlug %>.css'
-            },
+            }
         },
         watch: {
             options: {
@@ -64,7 +70,7 @@ module.exports = function(grunt) {
             },
             css: {
                 files: ['<%%= config.source %>/styles/{,*/}*.scss'],
-                tasks: ['sass:source', 'autoprefixer:source'],
+                tasks: ['sass:source', 'postcss:source'],
                 options: {
                     spawn: false,
                 },
@@ -101,17 +107,16 @@ module.exports = function(grunt) {
         },
         copy:{
             build: {
-                <% if( templateLang === 'php' ) { %>
-                images: {
-                    src: ['<%%= config.source %>/images/{,*/}*.{png,jpg,gif}'],
-                    dest: '<%%= config.build %>/images'
-                }
-                <% } else { %>
+                files: [{
                 expand: true,
-                cwd: '<%%= config.source %>/',
-                src: ['*.html', 'images/**'],
-                dest: '<%%= config.build %>/'
+                cwd: '<%= config.source %>/',
+                <% if( templateLang === 'php' ) { %>
+                src: 'scripts/libs/*.js',
+                <% } else { %>
+                src: ['*.html', 'scripts/libs/*.js'],
                 <% } %>
+                dest: '<%= config.build %>'
+                }]
             }
         },
         imagemin: {
@@ -173,12 +178,12 @@ module.exports = function(grunt) {
         }<% } %>
     });
 
-    grunt.registerTask('default', ['wiredep:source', 'sass:source', 'autoprefixer:source', 'watch']);
+    grunt.registerTask('default', ['wiredep:source', 'sass:source', 'postcss:source', 'watch']);
 
     grunt.registerTask('build', [
         'clean:build',<% if( templateLang === 'php' ) { %>
-        'php2html',<% } else { %>
-        'copy',<% } %>
+        'php2html',<% } %>
+        'copy',
         'wiredep:build',
         'useminPrepare',
         'concat',
@@ -186,9 +191,9 @@ module.exports = function(grunt) {
         'imagemin:build',
         'uglify',
         'usemin',
-        'clean:temp',<% if( templateLang === 'php' ) { %>
-        'copy',<% } %>
-        'sass:build'
+        'clean:temp',
+        'sass:build',
+        'postcss:build'
     ]);
 
     grunt.registerTask('pack', ['build', 'compress']);

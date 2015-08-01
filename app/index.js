@@ -110,7 +110,7 @@ var SkipcodeGenerator = yeoman.generators.Base.extend({
         }
 
         if( this.includeNormalize ) {
-            bower.dependencies["normalize.css"] = "~3.0.2";
+            bower.dependencies["normalize.css"] = "~3.0.3";
         }
 
         this.copy('bowerrc', '.bowerrc');
@@ -121,26 +121,28 @@ var SkipcodeGenerator = yeoman.generators.Base.extend({
         var packageFile = {
             name: this.appnameSlug,
             devDependencies: {
+                "autoprefixer-core": "^5.2.1",
+                "cssnano": "^2.1.1",
                 "grunt": "^0.4.5",
-                "load-grunt-tasks": "~0.6.0",
-                "grunt-contrib-sass": "~0.7.1",
-                "grunt-contrib-copy": "~0.7.0",
-                "grunt-contrib-clean": "~0.6.0",
-                "grunt-contrib-concat": "~0.5.0",
-                "grunt-contrib-watch": "~0.5.3",
-                "grunt-contrib-compress": "~0.12.0",
-                "grunt-contrib-imagemin": "~0.9.2",
-                "grunt-autoprefixer": "~1.0.1",
-                "grunt-contrib-uglify": "~0.6.0",
-                "grunt-contrib-cssmin": "^0.11.0",
-                "grunt-wiredep": "^1.9.0",
-                "grunt-usemin": "~2.6.2",
-                "time-grunt": "^1.0.0"
+                "grunt-contrib-clean": "^0.6.0",
+                "grunt-contrib-compress": "^0.13.0",
+                "grunt-contrib-concat": "^0.5.1",
+                "grunt-contrib-copy": "^0.8.0",
+                "grunt-contrib-imagemin": "^0.9.4",
+                "grunt-contrib-sass": "^0.9.2",
+                "grunt-contrib-uglify": "^0.9.1",
+                "grunt-contrib-watch": "^0.6.1",
+                "grunt-filerev": "^2.3.1",
+                "grunt-postcss": "^0.5.5",
+                "grunt-usemin": "^3.0.0",
+                "grunt-wiredep": "^2.0.0",
+                "load-grunt-tasks": "^3.2.0",
+                "time-grunt": "^1.2.1"
             }
         };
 
         if ( this.templateLang === 'php' ) {
-            packageFile.devDependencies["grunt-php2html"] = "~0.1.17";
+            packageFile.devDependencies["grunt-php2html"] = "^0.2.0";
         }
 
         this.write('package.json', JSON.stringify(packageFile, null, 2));
@@ -160,14 +162,14 @@ var SkipcodeGenerator = yeoman.generators.Base.extend({
                     templateLang: this.templateLang,
                     jQueryVersion: this.jQueryVersion
                 },
-                directories = ['mockups', 'source/images', 'source/styles/libs', 'source/styles/blocks', 'source/scripts/libs'],
+                directories = ['mockups', 'source/images', 'source/styles/libs', 'source/styles/blocks', 'source/scripts/lib', 'source/scripts/build-lib'],
                 emptyFiles = ['source/styles/libs/libs.scss', 'source/styles/fonts.scss', 'source/styles/blocks/blocks.scss'],
                 filesToCopy = {
                     '_mixins.scss': 'source/styles/mixins.scss',
                     '_variables.scss': 'source/styles/variables.scss',
                     '_base.scss': 'source/styles/base.scss',
                     '_projectname.scss': 'source/styles/' + this.appnameSlug + '.scss',
-                    '_scripts.js': 'source/scripts/' + this.appnameSlug + '.min.js'
+                    '_scripts.js': 'source/scripts/' + this.appnameSlug + '.js'
                 };
 
             if( this.templateLang === 'php' ) {
